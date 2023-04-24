@@ -12,8 +12,8 @@ module tb (
     input rst,
     input result,
     input inputReady,
-    input [4:0] inNibble,
-    output [4:0] outNibble,
+    input [3:0] inNibble,
+    output [3:0] outNibble,
     output busy
    );
 
@@ -25,10 +25,11 @@ module tb (
     end
 
     // wire up the inputs and outputs
-    wire [7:0] inputs = {inNibble[3], inNibble[2], inNibble[1], inNibble[0], inputReady, result, rst, clk};
+    // wire [7:0] inputs = {inNibble[3], inNibble[2], inNibble[1], inNibble[0], inputReady, result, rst, clk};
+    wire [7:0] inputs = {inNibble, inputReady, result, rst, clk};
     wire [7:0] outputs;
-    assign busy = outputs[4]
-    assign outNibble = outputs[3:0]
+    assign outNibble = outputs[3:0];
+    assign busy = outputs[4];
 
     // instantiate the DUT
     psychogenic_shaman psychogenic_shaman(
